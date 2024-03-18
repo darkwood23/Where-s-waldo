@@ -1,13 +1,14 @@
 import { useState } from 'react'
-import './App.css'
 import StartGame  from './components/startGame'
+import GlowingWaldo from './components/glowingWaldo'
 
 function App() {
   const [score, setscore] = useState(0)
 
   return (
     <div>
-      <StartGame image="" alt=""/>
+      <GlowingWaldo classList='svgGlow' w='200' h='200' />
+      <StartGame />
     </div>
   )
 }

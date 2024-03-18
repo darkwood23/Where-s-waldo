@@ -1,9 +1,5 @@
 function DisplayLeaderBoards(props) {
 
-    const playAgain = () => {
-
-    }
-
     return (
         <div className="leaderboard-div">
             <h1>LeaderBoards</h1>
@@ -25,7 +21,7 @@ function DisplayLeaderBoards(props) {
                 })}
             </div>
 
-            <button className="play-again" id="play-again" onClick={playAgain}>Play Again</button>
+            <button className="play-again" id="play-again" onClick={props.playAgain}>Play Again</button>
         </div>
     )
 }

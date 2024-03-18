@@ -1,9 +1,17 @@
-function StartGame(props) {
+import { Link } from "react-router-dom"
+
+function StartGame() {
     return (
         <div className="start-game-holder">
-            <img src={props.image} alt={props.alt} className="waldo-image"/>
             <h1 className="title">Where's Waldo?</h1>
-            <button className="start-game">Start Game!</button>
+            <div className="buttons">
+                <Link to="/game-screen">
+                    <button className="start-game">Start Game!</button>
+                </Link>
+                <Link to="/leaderboards">
+                    <button className="leader-boards-checkout-btn">Check Leaderboards</button>
+                </Link>
+            </div>
         </div>
     )
 }
