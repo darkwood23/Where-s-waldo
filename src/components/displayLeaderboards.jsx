@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 function DisplayLeaderBoards(props) {
 
     return (
@@ -20,8 +22,9 @@ function DisplayLeaderBoards(props) {
                     )
                 })}
             </div>
-
-            <button className="play-again" id="play-again" onClick={props.playAgain}>Play Again</button>
+            <Link to="/game-screen">
+                <button className="play-again">Play Again</button>
+            </Link>
         </div>
     )
 }

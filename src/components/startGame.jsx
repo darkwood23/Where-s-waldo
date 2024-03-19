@@ -8,7 +8,7 @@ function StartGame() {
                 <Link to="/game-screen">
                     <button className="start-game">Start Game!</button>
                 </Link>
-                <Link to="/leaderboards">
+                <Link to="/leader-boards">
                     <button className="leader-boards-checkout-btn">Check Leaderboards</button>
                 </Link>
             </div>

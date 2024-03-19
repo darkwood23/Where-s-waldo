@@ -1,0 +1,24 @@
+.target-container {
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    z-index: 10;
+    position: relative;
+}
+
+.character-targets {
+    display: flex;
+    flex-direction: column;
+}
+
+.targeting-box {
+    color: black;
+    width: 90px;
+    border: 5px solid black;
+    height: 80px;
+}
+
+.scene-btn {
+    position: absolute;
+    display: block;
+}
