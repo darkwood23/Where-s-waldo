@@ -3,6 +3,8 @@ import Wilma from "../images/wilma_400x400.png"
 import Wizard from "../images/wizard_400x400.png"
 import Scene from "../images/scene-winter.jpeg"
 
+const { getCoordinates } = require("../js/CoordinateController")
+
 import "../styles/gameScreen.css"
 
 import Character from "./character"
@@ -10,6 +12,9 @@ import Character from "./character"
 import { useState } from 'react'
 
 function GameScreen () {
+
+    const [ characterFound, changeCharacterFound ] = useState(0)
+
     const [clicked, setClicked] = useState(false)
     const [clickXPos, setClickXPos] = useState(0)
     const [clickYPos, setClickYPos] = useState(0)
@@ -27,6 +32,27 @@ function GameScreen () {
 
         const clickXCoordInScene = (clickXPos - scene.offsetLeft) / scene.clientWidth
         const clickYCoordInScene = (clickYPos - scene.offsetTop) / scene.clientWidth
+
+        const characterName = e.target.id
+        const character = getCoordinates(characterName)
+
+        const checkClickedCoords = async function () {
+            const charCoords = await character
+
+            if (
+                charCoords.left <= clickXCoordInScene &&
+                charCoords.right >= clickXCoordInScene &&
+                charCoords.bottom >= clickYCoordInScene &&
+                charCoords.top <= clickYCoordInScene
+            ) {
+                changeCharacterFound(characterName)
+                setClicked(false)
+            } else {
+                setClicked(false)
+            }
+        }
+
+        checkClickedCoords()
     }
 
     if (clicked) {
