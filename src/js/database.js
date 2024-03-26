@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-require("dotenv").config()
 
 const mongoDb = process.env.LOG_IN
 mongoose.connect(mongoDb)

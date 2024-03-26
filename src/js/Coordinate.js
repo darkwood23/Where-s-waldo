@@ -9,4 +9,4 @@ const CoordinateSchema = new Schema({
     top: { type: Number, required: true }
 })
 
-module.exports = mongoose.model("Coordinate", CoordinateSchema)
+export default mongoose.model("Coordinate", CoordinateSchema)

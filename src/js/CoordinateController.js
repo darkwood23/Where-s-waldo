@@ -1,6 +1,6 @@
-const Coordinate = require("./Coordinate")
+import Coordinate from "./Coordinate"
 
-module.exports.addCoordinate = async function(character, right, left, bottom, top) {
+const addCoordinate = async function(character, right, left, bottom, top) {
     if (character && right && left && bottom && top) {
         const coordinate = new Coordinate({
             character,
@@ -18,8 +18,10 @@ module.exports.addCoordinate = async function(character, right, left, bottom, to
     }
 }
 
-module.exports.getCoordinates = async function (character) {
+const getCoordinates = async function (character) {
     const coordinate = await Coordinate.find({ character }).exec()
 
     return coordinate
 }
+
+export default { addCoordinate: addCoordinate, getCoordinates: getCoordinates }

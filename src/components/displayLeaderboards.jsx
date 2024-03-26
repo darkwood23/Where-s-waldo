@@ -1,23 +1,37 @@
 import { Link } from "react-router-dom"
+import getScores from "../js/LeaderboardController"
+import { useEffect } from "react"
+import "../styles/leaderBoards.css"
 
-function DisplayLeaderBoards(props) {
+const getLeaderBoards = () => {
+    useEffect(() => {
+        console.log(getScores())
+        return getScores
+    }, [])
+
+}
+
+function DisplayLeaderBoards() {
+
+    // const leaderBoardArray = getLeaderBoards()
+    const leaderBoardArray = []
 
     return (
         <div className="leaderboard-div">
-            <h1>LeaderBoards</h1>
+            <h1>Leaderboards</h1>
 
             <div className="leaderboard">
                 <div className="titles">
                     <h2 className="sn">S.N.</h2>
                     <h2 className="username">Username</h2>
-                    <h2 className="score">Score</h2>
+                    <h2 className="score">Time</h2>
                 </div>
-                {props.leaderBoardArray.map((leaders, num) => {
+                { undefined === leaderBoardArray ? '' : leaderBoardArray.map((leaders, num) => {
                     return (
                         <div className="leader-element">
                             <h3 className="sn-leaderboard">{num}</h3>
                             <h3 className="leadername">{leaders.name}</h3>
-                            <h3 className="leader-score">{leaders.score}</h3>
+                            <h3 className="leader-score">{leaders.minutes}:{leaders.seconds}</h3>
                         </div>
                     )
                 })}

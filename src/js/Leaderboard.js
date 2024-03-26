@@ -3,7 +3,8 @@ import { Schema } from "mongoose";
 
 const leaderboardSchema = new Schema({
     username: { type: String, required: true },
-    score: { type: Number, required: true }
+    seconds: { type: Number, required: true },
+    minutes: { type: Number, required: true }
 })
 
-module.exports =  mongoose.model("Leaderboard", leaderboardSchema)
+export default  mongoose.model("Leaderboard", leaderboardSchema)

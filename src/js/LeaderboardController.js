@@ -1,18 +1,17 @@
-const Leaderboard = require("./Leaderboard")
+import Leaderboard from "./Leaderboard"
 
-exports.default.getScores = async function () {
+const getScores = async function () {
     const allLeaderboardItems = await Leaderboard.find().exec()
 
-    return {
-        items: allLeaderboardItems
-    }
+    return allLeaderboardItems
 }
 
-exports.default.addScores = async function (username, score) {
-    if (username && score) {
+const addScores = async function (username, seconds, minutes) {
+    if (username && seconds && minutes) {
         const leaderboardItem = new Leaderboard({
             username: username,
-            score: score
+            seconds: seconds,
+            minutes: minutes
         })
 
         await leaderboardItem.save()
@@ -26,3 +25,5 @@ exports.default.addScores = async function (username, score) {
         }
     }
 }
+
+export default { getScores: getScores, addScores: addScores}
