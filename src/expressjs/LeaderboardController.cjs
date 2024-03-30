@@ -1,4 +1,4 @@
-const Leaderboard = require("./Leaderboard")
+const Leaderboard = require("./Leaderboard.cjs")
 const asyncHandler = require("express-async-handler")
 
 module.exports.get_leaderboard_data = asyncHandler( async (req, res, next) => {

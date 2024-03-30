@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import { Schema } from "mongoose";
+const mongoose = require("mongoose")
+const Schema = mongoose.Schema
 
 const CoordinateSchema = new Schema({
     character: { type: String, required: true },
@@ -9,4 +9,4 @@ const CoordinateSchema = new Schema({
     top: { type: Number, required: true }
 })
 
-export default mongoose.model("Coordinate", CoordinateSchema)
+module.exports = mongoose.model("Coordinate", CoordinateSchema)

@@ -1,4 +1,4 @@
-const Coordinate = require("./Coordinate")
+const Coordinate = require("./Coordinate.cjs")
 const asyncHandler = require("express-async-handler")
 
 module.exports.get_coordinate = asyncHandler ( async (req, res, next) => {

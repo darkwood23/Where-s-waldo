@@ -1,8 +1,8 @@
 const express = require("express")
 const router = express.Router()
 
-const CoordinateController = require("./CoordinateController")
-const LeaderboardController = require("./LeaderboardController")
+const CoordinateController = require("./CoordinateController.cjs")
+const LeaderboardController = require("./LeaderboardController.cjs")
 
 router.get("/api/leaderboards", LeaderboardController.get_leaderboard_data)
 router.get("/api/coordinates", CoordinateController.get_coordinate)
