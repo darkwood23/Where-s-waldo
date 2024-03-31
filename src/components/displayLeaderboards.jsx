@@ -1,32 +1,21 @@
-import { Link, useSearchParams } from "react-router-dom"
-// import getScores from "../js/LeaderboardController"
+import { Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 import "../styles/leaderBoards.css"
-// import Leaderboard from "../js/Leaderboard"
-
-
-const getLeaderBoards = async () => {
-    // useEffect(() => {
-        const allScores = await Leaderboard.find().exec()
-        console.log(allScores)
-        // console.log(allScores)
-        return allScores
-    // }, [])
-
-}
+import axios from "axios"
 
 function DisplayLeaderBoards() {
-    // const [leaderBoardArray, setLeaderBoardArray] = useState()
-    // setLeaderBoardArray(getLeaderBoards())
+    const [leaderBoardArray, setLeaderBoardArray] = useState([])
+    const [data, setData] = useState()
 
-    Leaderboard.find((error, users) => {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log(users);
-        }
-    });
-    // const leaderBoardArray = []
+    useEffect(() => {
+        axios.get("http://localhost:8000/api/leaderboards").then(
+            response => {
+                setLeaderBoardArray(response.data.items)
+            }
+        ).catch (error => {
+            console.log(error)
+        })
+    }, [])
 
     return (
         <div className="leaderboard-div">
@@ -38,15 +27,15 @@ function DisplayLeaderBoards() {
                     <h2 className="username">Username</h2>
                     <h2 className="score">Time</h2>
                 </div>
-                {/* { undefined === leaderBoardArray ? '' : leaderBoardArray.map((leaders, num) => {
+                {leaderBoardArray.map((leaders, num) => {
                     return (
                         <div className="leader-element">
                             <h3 className="sn-leaderboard">{num}</h3>
-                            <h3 className="leadername">{leaders.name}</h3>
+                            <h3 className="leadername">{leaders.username}</h3>
                             <h3 className="leader-score">{leaders.minutes}:{leaders.seconds}</h3>
                         </div>
                     )
-                })} */}
+                })}
             </div>
             <Link to="/game-screen">
                 <button className="play-again">Play Again</button>

@@ -3,8 +3,6 @@ import Wilma from "../images/wilma_400x400.png"
 import Wizard from "../images/wizard_400x400.png"
 import Scene from "../images/scene-winter.jpeg"
 
-import getCoordinates from "../js/CoordinateController"
-
 import "../styles/gameScene.css"
 
 import Character from "./character"
@@ -28,31 +26,31 @@ function GameScene (props) {
     }
 
     function characterSelected(e) {
-        const scene = document.querySelector(".scene")
+        // const scene = document.querySelector(".scene")
 
-        const clickXCoordInScene = (clickXPos - scene.offsetLeft) / scene.clientWidth
-        const clickYCoordInScene = (clickYPos - scene.offsetTop) / scene.clientWidth
+        // const clickXCoordInScene = (clickXPos - scene.offsetLeft) / scene.clientWidth
+        // const clickYCoordInScene = (clickYPos - scene.offsetTop) / scene.clientWidth
 
-        const characterName = e.target.id
-        const character = getCoordinates(characterName)
+        // const characterName = e.target.id
+        // const character = getCoordinates(characterName)
 
-        const checkClickedCoords = async function () {
-            const charCoords = await character
+        // const checkClickedCoords = async function () {
+        //     const charCoords = await character
 
-            if (
-                charCoords.left <= clickXCoordInScene &&
-                charCoords.right >= clickXCoordInScene &&
-                charCoords.bottom >= clickYCoordInScene &&
-                charCoords.top <= clickYCoordInScene
-            ) {
-                changeCharacterFound(characterName)
-                setClicked(false)
-            } else {
-                setClicked(false)
-            }
-        }
+        //     if (
+        //         charCoords.left <= clickXCoordInScene &&
+        //         charCoords.right >= clickXCoordInScene &&
+        //         charCoords.bottom >= clickYCoordInScene &&
+        //         charCoords.top <= clickYCoordInScene
+        //     ) {
+        //         changeCharacterFound(characterName)
+        //         setClicked(false)
+        //     } else {
+        //         setClicked(false)
+        //     }
+        // }
 
-        checkClickedCoords()
+        // checkClickedCoords()
     }
 
     if (clicked) {

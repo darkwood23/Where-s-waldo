@@ -1,5 +1,6 @@
 const mongoose = require("mongoose")
 const express = require("express")
+const cors = require("cors")
 
 const catalogController = require("./catalog.cjs")
 
@@ -13,6 +14,11 @@ db.on("error", console.error.bind(console, "mongo connection error"))
 
 const app = express()
 
+app.use(cors())  
+app.use(express.json())
+
 app.use("/", catalogController)
 
-app.listen(3000, () => console.log("Server is listening at port 3000..."))
+const port = 8000
+
+app.listen(port, () => console.log(`Server is listening at port ${port}...`))
