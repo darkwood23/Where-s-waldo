@@ -6,11 +6,6 @@
     justify-content: center;
 }
 
-.titles {
-    display: flex;
-    gap: 2rem;
-}
-
 .play-again {
     width: 200px;
     height: 50px;
@@ -29,8 +24,10 @@
     transform: scale(1.018);
 }
 
-.leader-element {
-    display: flex;
-    flex-direction: row;
-    gap: 100px;
+td, table, th {
+    border: 2px solid black;
+    font-size: 1.5rem;
+    border-collapse: collapse;
+    padding: 1rem 2rem;
+    text-align: center;
 }
