@@ -7,7 +7,8 @@ import "../styles/gameScene.css"
 
 import Character from "./character"
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 function GameScene (props) {
 
@@ -17,6 +18,7 @@ function GameScene (props) {
     const [clickXPos, setClickXPos] = useState(0)
     const [clickYPos, setClickYPos] = useState(0)
     const [targetBoxWidth, setTargetBoxWidth] = useState(0)
+    const [allCoordinates, setAllCoordinates] = useState()
 
     const handleTargetClick = (e) => {
         setClicked(true)
@@ -25,39 +27,52 @@ function GameScene (props) {
         setTargetBoxWidth(0.05 * e.target.clientWidth)
     }
 
+    useEffect(() => {
+        axios.get("http://localhost:8000/api/coordinates").then(
+            response => {
+                setAllCoordinates(response.data.coordinates)
+            }
+        ).catch(error => {
+            console.log(error)
+        })
+    }, [])
+    
+
     function characterSelected(e) {
-        // const scene = document.querySelector(".scene")
+        const scene = document.querySelector(".scene")
 
-        // const clickXCoordInScene = (clickXPos - scene.offsetLeft) / scene.clientWidth
-        // const clickYCoordInScene = (clickYPos - scene.offsetTop) / scene.clientWidth
+        const clickXCoordInScene = (clickXPos - scene.offsetLeft) / scene.clientWidth
+        const clickYCoordInScene = (clickYPos - scene.offsetTop) / scene.clientWidth
 
-        // const characterName = e.target.id
-        // const character = getCoordinates(characterName)
+        const checkClickedCoords = async function () {
+            const charCoords = allCoordinates.filter((coord) => coord.character === e.target.id)
+            console.log(charCoords)
+            console.log({clickXCoordInScene, clickYCoordInScene})
 
-        // const checkClickedCoords = async function () {
-        //     const charCoords = await character
+            if (
+                charCoords[0].left <= clickXCoordInScene &&
+                charCoords[0].right >= clickXCoordInScene &&
+                charCoords[0].bottom >= clickYCoordInScene &&
+                charCoords[0].top <= clickYCoordInScene
+            ) {
+                console.log(`${e.target.id} is found`)
+                changeCharacterFound(toFind)
+                const toChange = document.querySelector(`.${e.target.id}`)
+                toChange.classList.add("found")
+                setClicked(false)
+            } else {
+                setClicked(false)
+            }
+        }
 
-        //     if (
-        //         charCoords.left <= clickXCoordInScene &&
-        //         charCoords.right >= clickXCoordInScene &&
-        //         charCoords.bottom >= clickYCoordInScene &&
-        //         charCoords.top <= clickYCoordInScene
-        //     ) {
-        //         changeCharacterFound(characterName)
-        //         setClicked(false)
-        //     } else {
-        //         setClicked(false)
-        //     }
-        // }
-
-        // checkClickedCoords()
+        checkClickedCoords()
     }
 
     if (clicked) {
         return (
             <div>
                 <button className='scene-btn' type='button' onClick={handleTargetClick}>
-                    <img src={Scene} alt="Where's waldo?" className='snow-scene' width="1880px" height="1200px" />
+                    <img src={Scene} alt="Where's waldo?" className="scene" width="1880px" height="1200px" />
                 </button>
                 <div style={{
                     left: clickXPos - targetBoxWidth / 2,

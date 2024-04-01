@@ -2,12 +2,12 @@ const Coordinate = require("./Coordinate.cjs")
 const asyncHandler = require("express-async-handler")
 
 module.exports.get_coordinate = asyncHandler ( async (req, res, next) => {
-    const coordinate = await Coordinate.findOne({ character: req.body.character }).exec()
+    const coordinates = await Coordinate.find().exec()
 
-    if(coordinate) {
+    if(coordinates) {
         res.status(200).json({
             message: 'Coordinates found successfully',
-            coordinate
+            coordinates
         })
     } else {
         res.status(404).json({

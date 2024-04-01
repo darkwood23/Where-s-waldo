@@ -5,6 +5,7 @@ import Wizard from "../images/wizard_400x400.png"
 import { useState, useEffect } from "react"
 import Character from "./character"
 import "../styles/gameScreen.css"
+import AddToLeaderboards from "./addToLeaderboards"
 
 function GameScreen () {
     const [ characterFound, changeCharacterFound ] = useState([
@@ -12,6 +13,8 @@ function GameScreen () {
         { name: 'wilma', found: false, src: Wilma },
         { name: 'wizard', found: false, src: Wizard }
     ])
+
+    const [ found, setFound ] = useState([])
 
     const [ seconds, setSeconds ] = useState(0)
     const [ minutes, setMinutes ] = useState(0)
@@ -28,6 +31,14 @@ function GameScreen () {
             clearInterval(id)
         }
     })
+
+    // setFound([ ...found, characterFound.filter((character) => character.found === true)])
+
+    // if(setFound.length === 3) {
+    //     return (
+    //         <AddToLeaderboards minutes={minutes} second={seconds}/>
+    //     )
+    // }
 
 
     return (

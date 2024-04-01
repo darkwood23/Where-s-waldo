@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom"
 
 function AddToLeaderboards(props) {
-    const { score } = props
+    const { minutes, seconds } = props
     return (
         <div className="add-to-leaderboards" >
             <div className="completion">
-                <p>Your score is: {score}</p>
+                <p>You finished in {minutes} minutes and {seconds} seconds </p>
             </div>
             <div className="add-leaderboard-form">
                 <label htmlFor="username">Username:</label>

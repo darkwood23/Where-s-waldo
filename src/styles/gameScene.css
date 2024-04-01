@@ -25,3 +25,7 @@
     height: 0;
     padding-bottom: 95%;
 }
+
+.found {
+    background-color: green;
+}
