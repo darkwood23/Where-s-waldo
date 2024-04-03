@@ -9,12 +9,12 @@ import AddToLeaderboards from "./addToLeaderboards"
 
 function GameScreen () {
     const [ characterFound, changeCharacterFound ] = useState([
-        { name: 'waldo', found: false, src: Waldo },
-        { name: 'wilma', found: false, src: Wilma },
-        { name: 'wizard', found: false, src: Wizard }
+        { name: 'waldo', found: false, src: Waldo, key: 'waldo' },
+        { name: 'wilma', found: false, src: Wilma, key: 'wilma' },
+        { name: 'wizard', found: false, src: Wizard, key: 'wizard' }
     ])
 
-    const [ found, setFound ] = useState([])
+    const [ foundCharacters, setFoundCharacters ] = useState(0)
 
     const [ seconds, setSeconds ] = useState(0)
     const [ minutes, setMinutes ] = useState(0)
@@ -22,6 +22,21 @@ function GameScreen () {
     if (seconds === 60) {
         setSeconds(0)
         setMinutes(minutes + 1)
+    }
+
+    const changeFound = (character) => {
+        const newFound = characterFound.map((char) => {
+            if (char.name === character) {
+                return {
+                    ...char,
+                    found: true
+                }
+            } else {
+                return char
+            }
+        })
+
+        changeCharacterFound(newFound)
     }
 
     useEffect(() => {
@@ -32,30 +47,40 @@ function GameScreen () {
         }
     })
 
-    // setFound([ ...found, characterFound.filter((character) => character.found === true)])
+    useState(() => {
+        characterFound.map((char) => {
+            if (char.found === true) {
+                setFoundCharacters(foundCharacters + 1)
+            }
+            console.log(foundCharacters)
+        })
+    }, [])
 
-    // if(setFound.length === 3) {
-    //     return (
-    //         <AddToLeaderboards minutes={minutes} second={seconds}/>
-    //     )
-    // }
-
-
-    return (
-        <div className="game-screen">
-            <div className="time">
-                <h1>Elapsed Time:</h1>
-                <h1>{minutes} : {seconds}</h1>
+    if (foundCharacters !== 3) {
+        return (
+            <div className="game-screen">
+                <div className="time">
+                    <h1>Elapsed Time:</h1>
+                    <h1>{minutes} : {seconds}</h1>
+                </div>
+                <h2>Find these: </h2>   
+                <div className="to-find">
+                    {characterFound.map((character) => {
+                        if (character.found) {
+                            return <Character name={character.name} image={character.src} classList="characters-found found" ky={character.key}/>
+                        } else {
+                            return <Character name={character.name} image={character.src} classList="characters-found" ky={character.key}/>
+                        }
+                    })}
+                </div>
+                <GameScene changeFound={changeFound}></GameScene>
             </div>
-            <h2>Find these: </h2>   
-            <div className="to-find">
-                {characterFound.map((character) => {
-                    return <Character name={character.name} image={character.src} classList="characters-found" />
-                })}
-            </div>
-            <GameScene changeCharacterFound={changeCharacterFound}></GameScene>
-        </div>
-    )
+        )
+    } else {
+        return (
+            <AddToLeaderboards minutes={minutes} second={seconds}/>
+        )
+    }
 }
 
 export default GameScreen

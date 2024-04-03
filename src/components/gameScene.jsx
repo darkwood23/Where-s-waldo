@@ -12,7 +12,7 @@ import axios from 'axios'
 
 function GameScene (props) {
 
-    const { changeCharacterFound } = props
+    const { changeFound } = props
 
     const [clicked, setClicked] = useState(false)
     const [clickXPos, setClickXPos] = useState(0)
@@ -46,8 +46,6 @@ function GameScene (props) {
 
         const checkClickedCoords = async function () {
             const charCoords = allCoordinates.filter((coord) => coord.character === e.target.id)
-            console.log(charCoords)
-            console.log({clickXCoordInScene, clickYCoordInScene})
 
             if (
                 charCoords[0].left <= clickXCoordInScene &&
@@ -55,10 +53,7 @@ function GameScene (props) {
                 charCoords[0].bottom >= clickYCoordInScene &&
                 charCoords[0].top <= clickYCoordInScene
             ) {
-                console.log(`${e.target.id} is found`)
-                changeCharacterFound(toFind)
-                const toChange = document.querySelector(`.${e.target.id}`)
-                toChange.classList.add("found")
+                changeFound(e.target.id)
                 setClicked(false)
             } else {
                 setClicked(false)
