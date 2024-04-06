@@ -12,7 +12,7 @@ import axios from 'axios'
 
 function GameScene (props) {
 
-    const { changeFound } = props
+    const { changeFound, addFound } = props
 
     const [clicked, setClicked] = useState(false)
     const [clickXPos, setClickXPos] = useState(0)
@@ -54,6 +54,7 @@ function GameScene (props) {
                 charCoords[0].top <= clickYCoordInScene
             ) {
                 changeFound(e.target.id)
+                addFound()
                 setClicked(false)
             } else {
                 setClicked(false)

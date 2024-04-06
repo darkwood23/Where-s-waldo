@@ -19,6 +19,8 @@ function GameScreen () {
     const [ seconds, setSeconds ] = useState(0)
     const [ minutes, setMinutes ] = useState(0)
 
+    const [ isRunning, setIsRunning ] = useState(true)
+
     if (seconds === 60) {
         setSeconds(0)
         setMinutes(minutes + 1)
@@ -39,22 +41,26 @@ function GameScreen () {
         changeCharacterFound(newFound)
     }
 
-    useEffect(() => {
-        const id = setInterval(() => setSeconds((oldSecond) => oldSecond + 1), 1000)
+    const addFound = () => {
+        setFoundCharacters(foundCharacters + 1)
+    }
 
+    useEffect(() => {
+        let id
+        if (isRunning) {
+            id = setInterval(() => setSeconds((oldSecond) => oldSecond + 1), 1000)
+        }
         return () => {
             clearInterval(id)
         }
+    }, [isRunning, minutes, seconds])
+
+    useEffect(() => {
+        if (foundCharacters === 3) {
+            setIsRunning(false)
+        }
     })
 
-    useState(() => {
-        characterFound.map((char) => {
-            if (char.found === true) {
-                setFoundCharacters(foundCharacters + 1)
-            }
-            console.log(foundCharacters)
-        })
-    }, [])
 
     if (foundCharacters !== 3) {
         return (
@@ -73,12 +79,12 @@ function GameScreen () {
                         }
                     })}
                 </div>
-                <GameScene changeFound={changeFound}></GameScene>
+                <GameScene changeFound={changeFound} addFound={addFound}></GameScene>
             </div>
         )
     } else {
         return (
-            <AddToLeaderboards minutes={minutes} second={seconds}/>
+            <AddToLeaderboards minutes={minutes} seconds={seconds}/>
         )
     }
 }
