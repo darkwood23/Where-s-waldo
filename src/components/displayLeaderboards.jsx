@@ -43,8 +43,8 @@ function DisplayLeaderBoards() {
                     </tbody>
                 </table>
             </div>
-            <Link to="/game-screen">
-                <button className="play-again">Play Again</button>
+            <Link to="/">
+                <button className="btn">Play Again</button>
             </Link>
         </div>
     )

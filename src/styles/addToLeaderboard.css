@@ -1,0 +1,21 @@
+.add-to-leaderboards {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    width: 100%;
+    gap: 7px;
+}
+
+input {
+    font-size: 2rem;
+}

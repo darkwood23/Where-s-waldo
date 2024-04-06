@@ -9,10 +9,10 @@ function StartGame() {
             <h1 className="title">Where's Waldo?</h1>
             <div className="buttons">
                 <Link to="/game-screen">
-                    <button className="start-btn">Start Game!</button>
+                    <button className="btn">Start Game!</button>
                 </Link>
                 <Link to="/leader-boards">
-                    <button className="start-btn">Check Leaderboards</button>
+                    <button className="btn">Check Leaderboards</button>
                 </Link>
             </div>
         </div>
